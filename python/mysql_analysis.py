@@ -1,5 +1,5 @@
 import os
-
+from pathlib import Path
 import pandas as pd
 
 from charts import (
@@ -79,9 +79,12 @@ def main():
     # ==========================================
     # 3. 数据导出模块
     # ==========================================
-    output_dir = "../output"
 
-    output_filename = f"{output_dir}/financial_analysis.xlsx"
+    output_dir = Path(__file__).resolve().parent.parent / "output"
+
+    output_dir.mkdir(exist_ok=True)
+
+    output_filename = output_dir / "financial_analysis.xlsx"
 
     with pd.ExcelWriter(output_filename) as writer:
         df.to_excel(writer, sheet_name="Financial Data", index=False)

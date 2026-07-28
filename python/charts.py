@@ -1,3 +1,8 @@
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
 import matplotlib.pyplot as plt
 
 
@@ -10,7 +15,7 @@ def draw_roe_chart(df):
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    plt.savefig("../output/ROE Comparison.png", dpi=300, bbox_inches="tight")
+    plt.savefig(OUTPUT_DIR / "ROE Comparison.png", dpi=300, bbox_inches="tight")
 
     plt.show()
 
@@ -24,7 +29,9 @@ def draw_return_chart(return_rank):
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    plt.savefig("../output/Stock Return Comparison.png", dpi=300, bbox_inches="tight")
+    plt.savefig(
+        OUTPUT_DIR / "Stock Return Comparison.png", dpi=300, bbox_inches="tight"
+    )
 
     plt.show()
 
@@ -46,6 +53,6 @@ def draw_scatter_chart(df):
 
     plt.tight_layout()
 
-    plt.savefig("../output/ROE vs Stock Return.png", dpi=300, bbox_inches="tight")
+    plt.savefig(OUTPUT_DIR / "ROE vs Stock Return.png", dpi=300, bbox_inches="tight")
 
     plt.show()
