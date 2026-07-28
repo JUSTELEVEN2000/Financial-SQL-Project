@@ -1,7 +1,13 @@
 import os
-import matplotlib.pyplot as plt
+
 import mysql.connector
 import pandas as pd
+
+from charts import (
+    draw_roe_chart,
+    draw_return_chart,
+    draw_scatter_chart,
+)
 
 # ==========================================
 # 1. 数据库连接模块
@@ -82,52 +88,17 @@ def main():
     print(f"平均 ROE: {df['roe'].mean():.2f}%")
     print(f"平均股票收益率: {df['return_rate'].mean():.2f}%")
 
-    # ==========================================
-    # 4. 数据可视化模块
-    # ==========================================
-
-    # 图表 1：企业 ROE 对比柱状图
-    plt.figure(figsize=(8, 5))
-    plt.bar(df["company_name"], df["roe"])
-    plt.xlabel("Company")
-    plt.ylabel("ROE (%)")
-    plt.title("ROE Comparison")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.show()
-
-    # 图表 2：企业股票收益率对比柱状图 (按收益率降序排列)
-    plt.figure(figsize=(8, 5))
-    plt.bar(return_rank["company_name"], return_rank["return_rate"])
-    plt.xlabel("Company")
-    plt.ylabel("Stock Return (%)")
-    plt.title("Stock Return Comparison")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.show()
-
-    # 图表 3：ROE 与股票收益率的交叉散点图 (探索相关性)
-    plt.figure(figsize=(6, 5))
-    plt.scatter(df["roe"], df["return_rate"])
-    plt.xlabel("ROE (%)")
-    plt.ylabel("Stock Return (%)")
-    plt.title("ROE vs Stock Return")
-
-    # 为散点图中的每个样本点添加公司名称标签 (.iloc 可以确保按位置索引准确对齐)
-    for i, name in enumerate(df["company_name"]):
-        plt.text(
-            df["roe"].iloc[i],
-            df["return_rate"].iloc[i],
-            name,
-            fontsize=9,
-        )
-    plt.tight_layout()
-    plt.show()
+    draw_roe_chart(df)
+    draw_return_chart(return_rank)
+    draw_scatter_chart(df)
 
     # ==========================================
-    # 5. 数据导出模块
+    # 4. 数据导出模块
     # ==========================================
-    output_filename = "financial_analysis.xlsx"
+    output_dir = "../output"
+
+    output_filename = f"{output_dir}/financial_analysis.xlsx"
+
     with pd.ExcelWriter(output_filename) as writer:
         df.to_excel(writer, sheet_name="Financial Data", index=False)
         roe_rank.to_excel(writer, sheet_name="ROE Ranking", index=False)
@@ -140,7 +111,7 @@ def main():
 
 
 # ==========================================
-# 6. 程序主入口
+# 5. 程序主入口
 # ==========================================
 if __name__ == "__main__":
     print("Financial Analysis Project Started...")
