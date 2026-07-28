@@ -1,6 +1,5 @@
 import os
 
-import mysql.connector
 import pandas as pd
 
 from charts import (
@@ -9,25 +8,10 @@ from charts import (
     draw_scatter_chart,
 )
 
-# ==========================================
-# 1. 数据库连接模块
-# ==========================================
-
-
-def connect_database():
-    # 建立与 MySQL 数据库的连接
-    connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Sly041632",
-        database="financial_project",
-    )
-    print("Database connected successfully!")
-    return connection
-
+from database import connect_database
 
 # ==========================================
-# 2. 核心业务逻辑与数据处理
+# 1. 核心业务逻辑与数据处理
 # ==========================================
 
 
@@ -70,7 +54,7 @@ def main():
     print(df)
 
     # ==========================================
-    # 3. 数据分析与计算
+    # 2. 数据分析与计算
     # ==========================================
 
     # 按 ROE 从高到低进行排序
@@ -93,7 +77,7 @@ def main():
     draw_scatter_chart(df)
 
     # ==========================================
-    # 4. 数据导出模块
+    # 3. 数据导出模块
     # ==========================================
     output_dir = "../output"
 
@@ -110,9 +94,6 @@ def main():
     print("==========================================")
 
 
-# ==========================================
-# 5. 程序主入口
-# ==========================================
 if __name__ == "__main__":
     print("Financial Analysis Project Started...")
     main()
