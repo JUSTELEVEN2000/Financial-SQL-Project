@@ -46,8 +46,6 @@ Financial_SQL_Project
 └── .env (not included)
 ```
 
----
-
 ## Analysis Workflow
 ```text
 MySQL Database
@@ -65,8 +63,6 @@ Visualization
 Excel Report
 ```
 
----
-
 ## Database Design
 
 The database contains three main tables:
@@ -83,8 +79,6 @@ Example:
 | 2 | Sony |
 | 3 | Nintendo |
 
----
-
 ### financials
 
 Stores annual financial indicators.
@@ -95,8 +89,6 @@ Main variables:
 - Revenue
 - Year
 
----
-
 ### stock_price
 
 Stores historical stock prices.
@@ -105,8 +97,6 @@ Main variables:
 
 - Date
 - Closing price
-
----
 
 ## Analysis Contents
 
@@ -140,7 +130,6 @@ Output:
 
 - Scatter plot of ROE vs Stock Return
 
----
 
 ## Example Output
 
@@ -155,33 +144,33 @@ Example result:
 Average ROE: 14.73%
 Average Stock Return: 19.23%
 
----
-
 ## How to Run
 
 ### 1. Install dependencies
 
 ```bash
 pip install -r python/requirements.txt
+```
 
-2. Configure database environment variables
+### 2. Configure database environment variables
 
 Create a .env file:
 
+```bash
 DB_HOST=localhost
 DB_USER=your_username
 DB_PASSWORD=your_password
 DB_NAME=financial_project
+```
 
-3. Run analysis
+### 3. Run analysis
 
 From project root:
 
+```bash
 python python/mysql_analysis.py
+```
 
----
-
-```markdown
 ## Future Improvements
 
 Possible extensions:
